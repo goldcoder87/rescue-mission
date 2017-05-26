@@ -1,0 +1,25 @@
+<% render "Layouts/flash" %>
+
+<h3>@question.title<h3>
+  <% link_to "delete question", @question, method: :delete %>
+
+  <h4>Description <% @question.body %></h4>
+
+  <% @anwers.each do |a| %>
+  <p>
+    <% a.body %>
+  </p>
+  <% end %>
+
+  <h5>Answer this Question:</h5>
+    <% forms_for [@question, @answer] do |f| %>
+    <div>
+      <% f.label 'Answer:', :body %>
+      <% f.text_field :body %>
+    </div>
+    <div>
+      <% f.submit %>
+    </div>
+
+    <% link_to 'index', questions_path %>
+    <% link_to 'Edit Question', edit_question_path %>
